@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutomateIt - Unlock Exponential Efficiency with AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --mouse-x: -200px;
+        --mouse-y: -200px;
+        --main-bg-rgb: 13, 13, 15;
+        --main-text-rgb: 229, 229, 229;
+        --muted-text-rgb: 163, 163, 163;
+        --accent-text-rgb: 96, 165, 250;
+        --card-bg-rgb: 38, 38, 38;
+        --card-bg-alpha: 0.5;
+        --card-border-rgb: 38, 38, 38;
+        --mouse-glow-rgb: 255, 255, 255;
+      }
+      html {
+        /* Firefox Scrollbar Styles */
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--card-border-rgb)) rgb(var(--main-bg-rgb));
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: rgb(var(--main-bg-rgb));
+        color: rgb(var(--main-text-rgb));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: background-color 0.15s linear, color 0.15s linear;
+      }
+      /* Custom Scrollbar Styles for Webkit browsers */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgb(var(--main-bg-rgb));
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(var(--card-border-rgb));
+        border-radius: 10px;
+        border: 2px solid rgb(var(--main-bg-rgb));
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(var(--accent-text-rgb), 0.8);
+      }
+      .scroll-smooth {
+        scroll-behavior: smooth;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition-delay: 0.2s;
+      }
+      .fade-in-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stagger-children > * {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+      .stagger-children.is-visible > * {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Add staggered delays */
+      .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
+      .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
+      .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+      .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
+
+      /* AI Platform Animation Styles */
+      .ai-platform-graphic-wrapper.is-drawn .animated-platform-graphic {
+        animation: ai-core-bang 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+      .ai-platform-graphic-wrapper.is-drawn .animated-platform-graphic svg {
+        animation: ai-core-glow 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .ai-platform-graphic-wrapper.is-drawn .animated-platform-graphic svg rect {
+        animation: ai-lines-glow 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      @keyframes ai-core-bang {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+      }
+
+      @keyframes ai-core-glow {
+        0% {
+          filter: drop-shadow(0 0 15px rgba(var(--accent-text-rgb), 0.7));
+        }
+        50% {
+          filter: drop-shadow(0 0 60px rgba(var(--accent-text-rgb), 1));
+        }
+        100% {
+          filter: drop-shadow(0 0 15px rgba(var(--accent-text-rgb), 0.7));
+        }
+      }
+
+      @keyframes ai-lines-glow {
+        0% { stroke: rgb(var(--card-border-rgb)); }
+        50% { stroke: rgba(var(--accent-text-rgb), 1); }
+        100% { stroke: rgb(var(--card-border-rgb)); }
+      }
+
+      .ai-platform-features-wrapper .ai-platform-feature {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .ai-platform-features-wrapper.is-revealed .ai-platform-feature {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+      
+      .ai-platform-features-wrapper.is-revealed .left-features .ai-platform-feature:nth-of-type(1) { transition-delay: 0.1s; }
+      .ai-platform-features-wrapper.is-revealed .left-features .ai-platform-feature:nth-of-type(2) { transition-delay: 0.2s; }
+      .ai-platform-features-wrapper.is-revealed .right-features .ai-platform-feature:nth-of-type(1) { transition-delay: 0.1s; }
+      .ai-platform-features-wrapper.is-revealed .right-features .ai-platform-feature:nth-of-type(2) { transition-delay: 0.2s; }
+
+
+      /* Styles for Blockchain Graphic */
+      .scene {
+        perspective: 1200px;
+        transform-style: preserve-3d;
+      }
+      .cube-cluster {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        animation: rotate-scene 80s infinite linear;
+        transform: rotateX(-35.264deg) rotateY(45deg);
+      }
+
+      @keyframes rotate-scene {
+        from { transform: rotateX(-35.264deg) rotateY(45deg) rotateZ(0deg); }
+        to { transform: rotateX(-35.264deg) rotateY(45deg) rotateZ(360deg); }
+      }
+
+      .cube {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        transform-style: preserve-3d;
+        animation: float 12s infinite ease-in-out;
+      }
+      
+      .cube__face {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      }
+      .cube__face--front  { transform: rotateY(  0deg) translateZ(40px); }
+      .cube__face--right  { transform: rotateY( 90deg) translateZ(40px); }
+      .cube__face--back   { transform: rotateY(180deg) translateZ(40px); }
+      .cube__face--left   { transform: rotateY(-90deg) translateZ(40px); }
+      .cube__face--top    { transform: rotateX( 90deg) translateZ(40px); }
+      .cube__face--bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+      @keyframes float {
+        0%, 100% { transform: translateZ(0px); }
+        50% { transform: translateZ(20px); }
+      }
+      
+      .sparkle {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        opacity: 0;
+        animation: sparkle-anim 12s infinite;
+      }
+
+      @keyframes sparkle-anim {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 0.6; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.5); }
+      }
+
+      /* Liquid Glass Effect */
+      .liquid-glass {
+        position: relative;
+        overflow: hidden;
+        /* More transparent background */
+        background: rgba(255, 255, 255, 0.05);
+        /* Increase blur for a stronger glass effect */
+        -webkit-backdrop-filter: blur(20px) saturate(1.8);
+        backdrop-filter: blur(20px) saturate(1.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+
+      .liquid-glass:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .liquid-glass::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        /* A sharp, white highlight at the top edge for a glossy look, and a subtle inner shadow for depth. */
+        box-shadow: inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.6), 
+                    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+      }
+
+      .interactive-glow::after {
+        content: '';
+        position: absolute;
+        inset: -1.5px;
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        background: radial-gradient(
+            400px circle at var(--mouse-x) var(--mouse-y),
+            rgba(var(--accent-text-rgb), 0.3),
+            transparent 80%
+        );
+        z-index: 1;
+        pointer-events: none;
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+      .interactive-glow:hover::after {
+        opacity: 1;
+      }
+
+      /* Starfield Background */
+      .starfield {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: radial-gradient(ellipse at bottom, #040710 0%, #000 100%);
+      }
+      .stars, .stars2, .stars3 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .stars {
+        background-image:
+          radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        animation: zoom-stars 15s infinite linear;
+        opacity: 0.6;
+      }
+      .stars2 {
+        background-image:
+          radial-gradient(1px 1px at 10px 90px, #eee, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 30px 50px, #fff, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 110px 180px, #ddd, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 250px 250px;
+        animation: zoom-stars 30s infinite linear;
+        opacity: 0.4;
+      }
+      .stars3 {
+        background-image:
+          radial-gradient(1px 1px at 180px 150px, #eee, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 230px 200px, #fff, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 300px 300px;
+        animation: zoom-stars 60s infinite linear;
+        opacity: 0.2;
+      }
+      @keyframes zoom-stars {
+        from { transform: scale(1); }
+        to { transform: scale(1.3); }
+      }
+
+      /* Coming Soon Page Animations */
+      .ken-burns-bg {
+          animation: ken-burns-effect 40s ease-out infinite;
+      }
+      @keyframes ken-burns-effect {
+          0% { transform: scale(1) translate(0, 0); }
+          50% { transform: scale(1.15) translate(5%, -5%); }
+          100% { transform: scale(1) translate(0, 0); }
+      }
+      .fade-in-slow {
+          opacity: 0;
+          animation: fade-in-anim 2s 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      @keyframes fade-in-anim {
+          to { opacity: 1; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.3.1",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1"
+  }
+}
+</script>
+</head>
+  <body class="scroll-smooth">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
