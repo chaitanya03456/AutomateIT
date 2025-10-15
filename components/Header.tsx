@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       >
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="#home" aria-label="AutomateIt homepage" onClick={handleLinkClick}>
-            <img src="/Images/pur_white.png" alt="AutomateIt logo" className="h-8 w-auto" />
+            <img src="/pur_white.png" alt="AutomateIt logo" className="h-8 w-auto" />
           </a>
           
           <nav className="hidden md:flex items-center space-x-8">

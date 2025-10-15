@@ -6,7 +6,7 @@ const AnimatedGridBackground: React.FC = () => {
   const scrollPosition = useScrollPosition();
   const parallaxFactor = 0.5;
   // Updated the background to the new cityscape image
-  const backgroundImageUrl = "/Images/herobg.jpg"; 
+  const backgroundImageUrl = "/herobg.jpg"; 
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-black">
