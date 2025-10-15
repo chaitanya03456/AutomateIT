@@ -7,7 +7,7 @@ interface ComingSoonPageProps {
 
 const ComingSoonPage: React.FC<ComingSoonPageProps> = ({ onBack }) => {
     // A more thematic background image path
-    const backgroundImageUrl = "/Images/bgcs1.jpeg";
+    const backgroundImageUrl = "/bgcs1.jpeg";
 
     return (
         <section id="coming-soon" className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
